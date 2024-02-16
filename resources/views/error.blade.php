@@ -1,0 +1,1 @@
+<h1>You don't have permission to access this page... Want to go home page -> <a href="{{ route('home')}}">Home</a></h1>
