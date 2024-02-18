@@ -15,8 +15,12 @@ class UserController extends Controller
     {
         $id = Auth::user()->id;
         $profileData = User::where('id', $id)->first();
+
         $users = User::paginate(10);
-        return view('template.DashBoard.Admin.8_Admin_Permission', compact('users', 'profileData'));
+        $usersSortByName = User::orderBy('name', 'asc')->paginate(10);
+        $usersSortByRoll = User::orderBy('roll', 'asc')->paginate(10);
+
+        return view('template.DashBoard.Admin.8_Admin_Permission', compact('users', 'usersSortByName', 'usersSortByRoll', 'profileData'));
     }
     public function AdminRollPermissionEdit($id)
     {

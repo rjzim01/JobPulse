@@ -13,13 +13,25 @@ class JobsController extends Controller
     {
         $cUId = auth()->user()->id;
         $profileData = User::where('id', $cUId)->first();
-        //$jobs = jobs::where('status', 'Active')->paginate(5);
-        $jobs = ApplyJob::where('user_id', $cUId)
-            ->with('jobs')
+
+        $jobs = ApplyJob::where('user_id', $cUId)->with('jobs')->paginate(10);
+        //$jobs = ApplyJob::where('user_id', $cUId)->with('jobs')->get();
+        $jobsSortByName = ApplyJob::where('user_id', $cUId)
+            ->with([
+                'jobs' => function ($query) {
+                    $query->orderBy('title', 'asc');
+                }
+            ])
             //->get();
-            ->paginate(5);
-        return view('template.DashBoard.Candidate.2_Candidate_Jobs', compact('jobs', 'profileData'));
+            ->paginate(10);
+
+        $jobsSortByDate = ApplyJob::where('user_id', $cUId)->orderBy('created_at', 'desc')->with('jobs')->orderBy('created_at', 'asc')->paginate(10);
+        //$jobsSortByDate = ApplyJob::where('user_id', $cUId)->orderBy('created_at', 'desc')->with('jobs')->get();
+
+        return view('template.DashBoard.Candidate.2_Candidate_Jobs', compact('jobs', 'jobsSortByName', 'jobsSortByDate', 'profileData'));
         //return $jobs;
+        //return $jobsSortByName;
+        //return $jobsSortByDate;
     }
     public function JobView($id)
     {
@@ -45,8 +57,12 @@ class JobsController extends Controller
     {
         $cUId = auth()->user()->id;
         $profileData = User::where('id', $cUId)->first();
+
         $jobs = jobs::where('company_id', $cUId)->paginate(5);
-        return view('template.DashBoard.Company.2_Company_Jobs', compact('jobs', 'profileData'));
+        $jobsSortByTitle = jobs::where('company_id', $cUId)->orderBy('title', 'asc')->paginate(10);
+        $jobsSortByDate = jobs::where('company_id', $cUId)->orderBy('created_at', 'asc')->paginate(10);
+
+        return view('template.DashBoard.Company.2_Company_Jobs', compact('jobs', 'jobsSortByTitle', 'jobsSortByDate', 'profileData'));
     }
     public function CompanyJobsCreate()
     {
@@ -101,18 +117,20 @@ class JobsController extends Controller
     {
         $cUId = auth()->user()->id;
         $profileData = User::where('id', $cUId)->first();
-        //find those who applied for the job
-        //$job = ApplyJob::where('job_id', $jobId)->first();
-        $users = ApplyJob::where('job_id', $jobId)
-            ->with('user')
-            ->paginate(10);
-        //->get();
+
         $job = jobs::where('id', $jobId)->first();
-        //$users = $job->users()->paginate(10);
-        //$users = $job->users()->get();
-        return view('template.DashBoard.Company.5_Company_Apply', compact('job', 'users', 'profileData'));
-        //return $users;
-        //return $job;
+
+        $users = ApplyJob::where('job_id', $jobId)->with('user')->paginate(10);
+        $usersSortByName = ApplyJob::where('job_id', $jobId)
+            ->with([
+                'user' => function ($query) {
+                    $query->orderBy('name', 'asc');
+                }
+            ])->paginate(10);
+
+        $usersSortByDate = ApplyJob::where('job_id', $jobId)->with('user')->orderBy('created_at', 'asc')->paginate(10);
+
+        return view('template.DashBoard.Company.5_Company_Apply', compact('job', 'users', 'usersSortByDate', 'usersSortByName', 'profileData'));
     }
     public function CompanyApplyUser($jobId, $userId)
     {
@@ -135,8 +153,12 @@ class JobsController extends Controller
     {
         $cUId = auth()->user()->id;
         $profileData = User::where('id', $cUId)->first();
+
         $jobs = jobs::paginate(10);
-        return view('template.DashBoard.Admin.4_Admin_Jobs', compact('jobs', 'profileData'));
+        $jobsSortByTitle = jobs::orderBy('title', 'asc')->paginate(10);
+        $jobsSortByStatus = jobs::orderBy('status', 'asc')->paginate(10);
+
+        return view('template.DashBoard.Admin.4_Admin_Jobs', compact('profileData', 'jobs', 'jobsSortByTitle', 'jobsSortByStatus'));
         //return $jobs;
     }
     public function AdminJobsEdit($id)

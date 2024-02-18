@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Company;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CompaniesController extends Controller
 {
@@ -39,9 +40,12 @@ class CompaniesController extends Controller
     {
         $cUId = auth()->user()->id;
         $profileData = User::where('id', $cUId)->first();
+
         $companies = User::where('roll', 'Company')->paginate(10);
-        //$companies = User::where('roll', 'Company')->orderBy()->get();
-        return view('template.DashBoard.Admin.2_Admin_Companies', compact('companies', 'profileData'));
+        $companiesSortByName = User::where('roll', 'Company')->orderBy('name', 'asc')->paginate(10);
+        $companiesSortByStatus = User::where('roll', 'Company')->orderBy('status', 'asc')->paginate(10);
+
+        return view('template.DashBoard.Admin.2_Admin_Companies', compact('companies', 'companiesSortByName', 'companiesSortByStatus', 'profileData'));
         //return $companies;
     }
     public function AdminCompaniesEdit($id)
