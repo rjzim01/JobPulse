@@ -40,8 +40,9 @@ class CompaniesController extends Controller
         $cUId = auth()->user()->id;
         $profileData = User::where('id', $cUId)->first();
         $companies = User::where('roll', 'Company')->paginate(10);
+        //$companies = User::where('roll', 'Company')->orderBy()->get();
         return view('template.DashBoard.Admin.2_Admin_Companies', compact('companies', 'profileData'));
-        // return $companies;
+        //return $companies;
     }
     public function AdminCompaniesEdit($id)
     {

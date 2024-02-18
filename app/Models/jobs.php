@@ -14,9 +14,15 @@ class jobs extends Model
     // {
     //     return $this->belongsToMany(User::class);
     // }
+
     public function users()
     {
         return $this->belongsToMany(User::class, 'apply_jobs', 'job_id', 'user_id');
+    }
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class, 'company_id', 'user_id');
     }
 
 }

@@ -39,7 +39,7 @@
           <li><a href="{{ route('home') }}">Home</a></li>
           <li><a href="{{ route('AboutPage') }}">About</a></li>
           <li><a href="{{ route('JobPage') }}">Jobs</a></li>
-          <li><a href="#">Blogs</a></li>
+          <li><a href="{{ route('BlogPage') }}">Blogs</a></li>
           <li><a href="{{ route('ContactPage') }}">Contact</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>

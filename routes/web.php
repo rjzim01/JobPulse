@@ -27,7 +27,7 @@ use App\Http\Controllers\Auth\NewPasswordController;
 //     Route::delete('/p', [ProfileController::class, 'destroy'])->name('profile.destroy');
 // });
 
-//require __DIR__ . '/auth.php';
+require __DIR__ . '/auth.php';
 
 // Route::middleware('auth')->group(function () {
 //     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
@@ -35,17 +35,17 @@ use App\Http\Controllers\Auth\NewPasswordController;
 // });
 
 // Route::middleware('guest')->group(function () {
-Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
-Route::post('register', [RegisteredUserController::class, 'store']);
+// Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
+// Route::post('register', [RegisteredUserController::class, 'store']);
 
-Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('login');
-Route::post('login', [AuthenticatedSessionController::class, 'store']);
+// Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('login');
+// Route::post('login', [AuthenticatedSessionController::class, 'store']);
 
-Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])->name('password.request');
-Route::post('forgot-password', [PasswordResetLinkController::class, 'store'])->name('password.email');
+// Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])->name('password.request');
+// Route::post('forgot-password', [PasswordResetLinkController::class, 'store'])->name('password.email');
 
-Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])->name('password.reset');
-Route::post('reset-password', [NewPasswordController::class, 'store'])->name('password.store');
+// Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])->name('password.reset');
+// Route::post('reset-password', [NewPasswordController::class, 'store'])->name('password.store');
 // });
 
 Route::get('/error', function () {
@@ -54,9 +54,11 @@ Route::get('/error', function () {
 
 ////////////////////////////////----------Pages----------///////////////////////////////////////////////////////////////////////////
 Route::get('/', [MainController::class, 'home'])->name('home');
-Route::get('/jobs', [MainController::class, 'JobPage'])->name('JobPage');
 Route::get('/about', [MainController::class, 'AboutPage'])->name('AboutPage');
+Route::get('/jobs', [MainController::class, 'JobPage'])->name('JobPage');
+Route::get('/blog', [MainController::class, 'BlogPage'])->name('BlogPage');
 Route::get('/contact', [MainController::class, 'ContactPage'])->name('ContactPage');
+Route::post('/contactText', [MainController::class, 'ContactText'])->name('ContactText');
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 Route::middleware('auth')->group(function () {

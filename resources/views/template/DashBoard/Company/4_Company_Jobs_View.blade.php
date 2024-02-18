@@ -35,13 +35,29 @@
                         <div class="input-group">
                           <input type="text" class="form-control" value="{{ optional($job)->category }}">
                           <select class="form-select" name="category">
-                            <option value="">Select Category</option>
+                            <option value="{{ optional($job)->category }}">Select Category</option>
                             <option value="Software Engineer">Software Engineer</option>
                             <option value="Developers">Developers</option>
                             <option value="Designers">Designers</option>
                             <option value="Marketers">Marketers</option>
                             <option value="UI/UX">UI/UX</option>
                             <option value="Others">Others</option>
+                          </select>
+                        </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-3">
+                        <label class="form-label">Job Type</label>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="input-group">
+                          <input type="text" class="form-control" value="{{ optional($job)->type }}">
+                          <select class="form-select" name="type">
+                            <option value="{{ optional($job)->type }}">Select Type</option>
+                            <option value="Remote">Remote</option>
+                            <option value="On-Site">On-Site</option>
                           </select>
                         </div>
                     </div>

@@ -5,11 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\jobs;
 use App\Models\User;
 use App\Models\Company;
+use App\Models\BlogPage;
 use App\Models\HomePage;
 use App\Models\JobsPage;
 use App\Models\AboutPage;
 use App\Models\ContactPage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OTPMail;
+use Exception;
 
 class MainController extends Controller
 {
@@ -18,18 +22,30 @@ class MainController extends Controller
         $homePageData = HomePage::first();
 
         $company = Company::all();
-        $jobs = jobs::where('status', 'Active')->paginate(2);
+
+        $jobsAll = jobs::where('status', 'Active')->count();
+        //$jobs = jobs::where('status', 'Active')->orderBy('created_at', 'desc')->paginate(5);
+        $jobs = jobs::with('company')->where('status', 'Active')->orderBy('created_at', 'desc')->paginate(5);
+        //$jobs = jobs::with('company')->where('status', 'Active')->get();
 
         $developerJob = jobs::where('status', 'Active')->where('category', 'Developers')->count();
-        $designerJob = jobs::where('status', 'Active')->where('category', 'Designers')->count();
-        $uiuxJob = jobs::where('status', 'Active')->where('category', 'UI/UX')->count();
-        $marketingJob = jobs::where('status', 'Active')->where('category', 'Marketing')->count();
-        $otherJob = jobs::where('status', 'Active')
-            ->whereNotIn('category', ['Developers', 'Designers', 'UI/UX', 'Marketing'])
-            ->count();
+        $developerJobShow = jobs::with('company')->where('status', 'Active')->where('category', 'Developers')->orderBy('created_at', 'desc')->paginate(5);
 
-        return view('template.Page.1_home', compact('company', 'jobs', 'developerJob', 'designerJob', 'uiuxJob', 'marketingJob', 'otherJob', 'homePageData'));
-        //return $company;
+        $designerJob = jobs::where('status', 'Active')->where('category', 'Designers')->count();
+        $designerJobShow = jobs::with('company')->where('status', 'Active')->where('category', 'Designers')->orderBy('created_at', 'desc')->paginate(5);
+
+        $uiuxJob = jobs::where('status', 'Active')->where('category', 'UI/UX')->count();
+        $uiuxJobShow = jobs::with('company')->where('status', 'Active')->where('category', 'UI/UX')->orderBy('created_at', 'desc')->paginate(5);
+
+        $marketingJob = jobs::where('status', 'Active')->where('category', 'Marketers')->count();
+        $marketingJobShow = jobs::with('company')->where('status', 'Active')->where('category', 'Marketers')->orderBy('created_at', 'desc')->paginate(5);
+
+        $otherJob = jobs::with('company')->where('status', 'Active')->whereNotIn('category', ['Developers', 'Designers', 'UI/UX', 'Marketers'])->count();
+        $otherJobShow = jobs::with('company')->where('status', 'Active')->whereNotIn('category', ['Developers', 'Designers', 'UI/UX', 'Marketers'])->orderBy('created_at', 'desc')->paginate(5);
+
+        return view('template.Page.1_home', compact('company', 'jobs', 'jobsAll', 'developerJob', 'developerJobShow', 'designerJob', 'designerJobShow', 'uiuxJob', 'uiuxJobShow', 'marketingJob', 'marketingJobShow', 'otherJob', 'otherJobShow', 'homePageData'));
+
+        //return $jobs;
     }
     public function HomePageAdmin()
     {
@@ -106,17 +122,30 @@ class MainController extends Controller
     {
         $jobsPageData = JobsPage::first();
 
+        $jobsAll = jobs::where('status', 'Active')->count();
+        $jobs = jobs::where('status', 'Active')->orderBy('created_at', 'desc')->paginate(4);
+
         $developerJob = jobs::where('status', 'Active')->where('category', 'Developers')->count();
+        $developerJobShow = jobs::where('status', 'Active')->where('category', 'Developers')->orderBy('created_at', 'desc')->paginate(4);
+
         $designerJob = jobs::where('status', 'Active')->where('category', 'Designers')->count();
+        $designerJobShow = jobs::where('status', 'Active')->where('category', 'Designers')->orderBy('created_at', 'desc')->paginate(4);
+
         $uiuxJob = jobs::where('status', 'Active')->where('category', 'UI/UX')->count();
-        $marketingJob = jobs::where('status', 'Active')->where('category', 'Marketing')->count();
+        $uiuxJobShow = jobs::where('status', 'Active')->where('category', 'UI/UX')->orderBy('created_at', 'desc')->paginate(4);
+
+        $marketingJob = jobs::where('status', 'Active')->where('category', 'Marketers')->count();
+        $marketingJobShow = jobs::where('status', 'Active')->where('category', 'Marketers')->orderBy('created_at', 'desc')->paginate(4);
+
         $otherJob = jobs::where('status', 'Active')
-            ->whereNotIn('category', ['Developers', 'Designers', 'UI/UX', 'Marketing'])
+            ->whereNotIn('category', ['Developers', 'Designers', 'UI/UX', 'Marketers'])
             ->count();
+        $otherJobShow = jobs::where('status', 'Active')
+            ->whereNotIn('category', ['Developers', 'Designers', 'UI/UX', 'Marketers'])
+            ->orderBy('created_at', 'desc')->paginate(4);
 
-        $jobs = jobs::where('status', 'Active')->paginate(4);
 
-        return view('template.Page.3_jobs', compact('jobs', 'developerJob', 'designerJob', 'uiuxJob', 'marketingJob', 'otherJob', 'jobsPageData'));
+        return view('template.Page.3_jobs', compact('jobs', 'jobsAll', 'developerJob', 'developerJobShow', 'designerJob', 'designerJobShow', 'uiuxJob', 'uiuxJobShow', 'marketingJob', 'marketingJobShow', 'otherJob', 'otherJobShow', 'jobsPageData'));
     }
     public function JobsPageAdmin()
     {
@@ -152,50 +181,40 @@ class MainController extends Controller
     }
     public function BlogPage()
     {
-        $developerJob = jobs::where('status', 'Active')->where('category', 'Developers')->count();
-        $designerJob = jobs::where('status', 'Active')->where('category', 'Designers')->count();
-        $uiuxJob = jobs::where('status', 'Active')->where('category', 'UI/UX')->count();
-        $marketingJob = jobs::where('status', 'Active')->where('category', 'Marketing')->count();
-        $otherJob = jobs::where('status', 'Active')
-            ->whereNotIn('category', ['Developers', 'Designers', 'UI/UX', 'Marketing'])
-            ->count();
-
-        $jobs = jobs::where('status', 'Active')->paginate(4);
-
-        return view('template.Page.3_jobs', compact('jobs', 'developerJob', 'designerJob', 'uiuxJob', 'marketingJob', 'otherJob'));
+        $blogPageData = BlogPage::first();
+        return view('template.Page.6_blog', compact('blogPageData'));
     }
     public function BlogPageAdmin()
     {
         $cUId = auth()->user()->id;
         $profileData = User::where('id', $cUId)->first();
-        $aboutPageData = AboutPage::first();
-        return view('template.DashBoard.Admin.14_Admin_BlogPageCreate', compact('profileData', 'aboutPageData'));
+        $blogPageData = BlogPage::first();
+        return view('template.DashBoard.Admin.14_Admin_BlogPageCreate', compact('profileData', 'blogPageData'));
     }
     public function BlogPageStoreAdmin(Request $request)
     {
-        $aboutPageData = AboutPage::firstOrNew();
+        $blogPageData = BlogPage::firstOrNew();
 
-        $aboutPageData->company_title = $request->input('company_title');
-        $aboutPageData->company_history = $request->input('company_history');
-        $aboutPageData->company_vision = $request->input('company_vision');
+        $blogPageData->title = $request->input('title');
+        $blogPageData->sub_title = $request->input('sub_title');
 
-        if ($request->hasFile('company_about_banner_image')) {
-            $file = $request->file('company_about_banner_image');
+        if ($request->hasFile('bg_img')) {
+            $file = $request->file('bg_img');
 
             // Delete previous image if it exists
-            if ($aboutPageData->company_about_banner_image) {
-                @unlink(public_path('upload/aboutBanner/' . $aboutPageData->company_about_banner_image));
+            if ($blogPageData->bg_img) {
+                @unlink(public_path('upload/blogBanner/' . $blogPageData->bg_img));
             }
 
             // Move and save new image
             $filename = date('YmdHi') . $file->getClientOriginalName();
-            $file->move(public_path('upload/aboutBanner'), $filename);
-            $aboutPageData->company_about_banner_image = $filename;
+            $file->move(public_path('upload/blogBanner'), $filename);
+            $blogPageData->bg_img = $filename;
         }
 
-        $aboutPageData->save();
+        $blogPageData->save();
 
-        return redirect()->back()->with('success', 'About Page Created Successfully');
+        return redirect()->back()->with('success', 'Blog Page Updated Successfully');
     }
     public function ContactPage()
     {
@@ -236,6 +255,36 @@ class MainController extends Controller
         $aboutPageData->save();
 
         return redirect()->back()->with('success', 'Contact Page Updated Successfully');
+    }
+    public function ContactText(Request $request)
+    {
+        // $AdminEmail = 'jobpulse@info.com';
+
+        // $details = [
+        //     'name' => $request->name,
+        //     'email' => $request->email,
+        //     'subject' => $request->subject,
+        //     'message' => $request->message,
+        // ];
+
+        // Mail::to($AdminEmail)->send(new OTPMail($details));
+        // return redirect()->back()->with('success', "We will contact with you soon...");
+
+        try {
+            $AdminEmail = 'jobpulse@info.com';
+
+            $details = [
+                'name' => $request->name,
+                'email' => $request->email,
+                'subject' => $request->subject,
+                'message' => $request->message,
+            ];
+
+            Mail::to($AdminEmail)->send(new OTPMail($details));
+            return redirect()->back()->with('success', "We will contact with you soon...");
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', "Something went wrong...");
+        }
     }
 
 }

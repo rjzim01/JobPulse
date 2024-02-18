@@ -21,7 +21,27 @@
 
       <div class="form-group">
         <label >Job Category</label>
-        <input type="text" class="form-control" name="category" >
+        {{-- <input type="text" class="form-control" name="category" > --}}
+        <select class="form-select" name="category">
+          <option value="">Select Category</option>
+          <option value="Software Engineer">Software Engineer</option>
+          <option value="Developers">Developers</option>
+          <option value="Designers">Designers</option>
+          <option value="Marketers">Marketers</option>
+          <option value="UI/UX">UI/UX</option>
+          <option value="Others">Others</option>
+        </select>
+      </div>
+
+      <br>
+
+      <div class="form-group">
+        <label >Job Type</label>
+        <select class="form-select" name="type">
+          <option value="">Select Type</option>
+          <option value="Remote">Remote</option>
+          <option value="On-Site">On-Site</option>
+        </select>
       </div>
 
       <br>

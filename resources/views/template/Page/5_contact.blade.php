@@ -42,9 +42,10 @@
                 </div>
               </div>
             </div>
+
             <div class="col-md-6">
               <h4 style="padding: 5px 0px 5px 0px;">Get in touch</h4>
-              <form action="" method="post">
+              <form action="{{ route('ContactText') }}" method="post">
                 @csrf
                 <div class="row">
                   <div class="col-md-6">

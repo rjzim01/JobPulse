@@ -17,7 +17,7 @@
     <br>
 
     <div class="border p-3">
-      <form action="{{ route('HomePageStoreAdmin') }}" method="post" enctype="multipart/form-data">
+      <form action="{{ route('BlogPageStoreAdmin') }}" method="post" enctype="multipart/form-data">
         @csrf
 
         <div class="d-flex justify-content-end">
@@ -25,33 +25,26 @@
         </div>
 
         <div class="form-group">
-          <label>Page Title</label>
-          <input type="text" name="company_title" value="{{ optional($aboutPageData)->company_title }}" class="form-control" style="width: 50%;">
+          <label>Blog Page Title</label>
+          <input type="text" name="title" value="{{ optional($blogPageData)->title }}" class="form-control" style="width: 50%;">
         </div>
         
         <br>
         
         <div class="form-group">
-          <label for="aboutContent">Company History</label>
-          <textarea class="form-control" name="company_history" rows="3" placeholder="Company History">{{ optional($aboutPageData)->company_history }}</textarea>
+          <label>Blog Sub Title</label>
+          <input type="text" name="sub_title" value="{{ optional($blogPageData)->sub_title }}" class="form-control">
         </div>
 
         <br>
 
-        <div class="form-group">
-          <label for="aboutContent">Company Vision</label>
-          <textarea class="form-control" name="company_vision" rows="3" placeholder="Company Vision">{{ optional($aboutPageData)->company_vision }}</textarea>
-        </div>
-
-        <br>
-
-        <label>Home Banner Image</label>
+        <label>Blog Banner Image</label>
         <div class="content" style="text-align: center; margin:10px 0px 10px 0px; padding: 10px 10px 10px 10px; background: rgb(253, 253, 253); min-height: 100px;">
-          <img id="imagePreview" src="{{ url('upload/aboutBanner/' . $aboutPageData->company_about_banner_image)  }}" style="display: block;" height="95vh" width="100%">
+          <img id="imagePreview" src="{{ url('upload/blogBanner/' . optional($blogPageData)->bg_img)  }}" style="display: block;" height="95vh" width="100%">
         </div>
 
         <div class="mt-3">
-          Page Banner Image <input type="file" id="imageUpload" name="company_about_banner_image" accept="image/*" onchange="previewImage(event)">
+          Page Banner Image <input type="file" id="imageUpload" name="bg_img" accept="image/*" onchange="previewImage(event)">
         </div>
         
       </form>

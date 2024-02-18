@@ -47,7 +47,6 @@ class JobsController extends Controller
         $profileData = User::where('id', $cUId)->first();
         $jobs = jobs::where('company_id', $cUId)->paginate(5);
         return view('template.DashBoard.Company.2_Company_Jobs', compact('jobs', 'profileData'));
-        // return $companies;
     }
     public function CompanyJobsCreate()
     {
@@ -58,9 +57,10 @@ class JobsController extends Controller
     public function CompanyJobsStore(Request $request)
     {
         $user = auth()->user();
-        $job = new jobs(); // Create a new job instance
+        $job = new jobs();
         $job->company_id = $user->id;
         $job->category = $request->input('category');
+        $job->type = $request->input('type');
         $job->title = $request->input('title');
         $job->description = $request->input('description');
         $job->benefits = $request->input('benefits');
@@ -80,11 +80,9 @@ class JobsController extends Controller
     }
     public function CompanyJobViewUpdate(Request $request, $jobId)
     {
-        // $request->validate([
-        //     'status' => 'required',
-        // ]);
         jobs::where('id', $jobId)->update([
             'category' => $request->category,
+            'type' => $request->type,
             'title' => $request->title,
             'description' => $request->description,
             'benefits' => $request->benefits,
