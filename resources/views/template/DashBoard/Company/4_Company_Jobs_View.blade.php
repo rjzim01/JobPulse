@@ -29,13 +29,21 @@
 
                   <div class="row">
                     <div class="col-md-3">
+                        <label class="form-label">Job Title</label>
+                    </div>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" value="{{ optional($job)->title }}" name="title">
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-3">
                         <label class="form-label">Job Category</label>
                     </div>
                     <div class="col-md-9">
                         <div class="input-group">
-                          <input type="text" class="form-control" value="{{ optional($job)->category }}">
                           <select class="form-select" name="category">
-                            <option value="{{ optional($job)->category }}">Select Category</option>
+                            <option value="{{ optional($job)->category }}">{{ optional($job)->category }}</option>
                             <option value="Software Engineer">Software Engineer</option>
                             <option value="Developers">Developers</option>
                             <option value="Designers">Designers</option>
@@ -53,9 +61,8 @@
                     </div>
                     <div class="col-md-9">
                         <div class="input-group">
-                          <input type="text" class="form-control" value="{{ optional($job)->type }}">
                           <select class="form-select" name="type">
-                            <option value="{{ optional($job)->type }}">Select Type</option>
+                            <option value="{{ optional($job)->type }}">{{ optional($job)->type }}</option>
                             <option value="Remote">Remote</option>
                             <option value="On-Site">On-Site</option>
                           </select>
@@ -64,12 +71,71 @@
                   </div>
 
                   <div class="row">
-                      <div class="col-md-3">
-                          <label class="form-label">Job Title</label>
-                      </div>
-                      <div class="col-md-9">
-                          <input type="text" class="form-control" value="{{ optional($job)->title }}" name="title">
-                      </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Skill Required</label>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="input-group">
+
+                          <select class="form-select" name="skill1">
+                            <option value="{{ optional($job)->skill1 }}">{{ optional($job)->skill1 }}</option>
+                            <option value="Java">Java</option>
+                            <option value="Php">Php</option>
+                            <option value="Python">Python</option>
+                            <option value="Javascript">Javascript</option>
+                            <option value="C++">C++</option>
+                            <option value="Bsc">Bsc</option>
+                            <option value="Oop">Oop</option>
+                            <option value="Git">Git</option>
+                          </select>
+
+                          <select class="form-select" name="skill2">
+                            <option value="{{ optional($job)->skill2 }}">{{ optional($job)->skill2 }}</option>
+                            <option value="Java">Java</option>
+                            <option value="Php">Php</option>
+                            <option value="Python">Python</option>
+                            <option value="Javascript">Javascript</option>
+                            <option value="C++">C++</option>
+                            <option value="Bsc">Bsc</option>
+                            <option value="Oop">Oop</option>
+                            <option value="Git">Git</option>
+                          </select>
+
+                          <select class="form-select" name="skill3">
+                            <option value="{{ optional($job)->skill3 }}">{{ optional($job)->skill3 }}</option>
+                            <option value="Java">Java</option>
+                            <option value="Php">Php</option>
+                            <option value="Python">Python</option>
+                            <option value="Javascript">Javascript</option>
+                            <option value="C++">C++</option>
+                            <option value="Bsc">Bsc</option>
+                            <option value="Oop">Oop</option>
+                            <option value="Git">Git</option>
+                          </select>
+
+                          <select class="form-select" name="skill4">
+                            <option value="{{ optional($job)->skill4 }}">{{ optional($job)->skill4 }}</option>
+                            <option value="Java">Java</option>
+                            <option value="Php">Php</option>
+                            <option value="Python">Python</option>
+                            <option value="Javascript">Javascript</option>
+                            <option value="C++">C++</option>
+                            <option value="Bsc">Bsc</option>
+                            <option value="Oop">Oop</option>
+                            <option value="Git">Git</option>
+                          </select>
+
+                        </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-3">
+                        <label class="form-label">Salary</label>
+                    </div>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" value="{{ optional($job)->salary }}" name="salary">
+                    </div>
                   </div>
           
                   <div class="row">

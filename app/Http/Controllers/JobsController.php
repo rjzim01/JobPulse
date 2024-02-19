@@ -78,6 +78,11 @@ class JobsController extends Controller
         $job->category = $request->input('category');
         $job->type = $request->input('type');
         $job->title = $request->input('title');
+        $job->skill1 = $request->input('skill1');
+        $job->skill2 = $request->input('skill2');
+        $job->skill3 = $request->input('skill3');
+        $job->skill4 = $request->input('skill4');
+        $job->salary = $request->input('salary');
         $job->description = $request->input('description');
         $job->benefits = $request->input('benefits');
         $job->location = $request->input('location');
@@ -97,9 +102,14 @@ class JobsController extends Controller
     public function CompanyJobViewUpdate(Request $request, $jobId)
     {
         jobs::where('id', $jobId)->update([
+            'title' => $request->title,
             'category' => $request->category,
             'type' => $request->type,
-            'title' => $request->title,
+            'skill1' => $request->skill1,
+            'skill2' => $request->skill2,
+            'skill3' => $request->skill3,
+            'skill4' => $request->skill4,
+            'salary' => $request->salary,
             'description' => $request->description,
             'benefits' => $request->benefits,
             'location' => $request->location,

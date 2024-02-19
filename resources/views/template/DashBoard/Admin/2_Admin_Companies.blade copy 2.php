@@ -19,11 +19,14 @@
           <div class="card px-5 py-5">
             <div class="row justify-content-between ">
                 <div class="align-items-center col">
-                    <h4>Companies</h4>
+                    <h4>Customer</h4>
+                </div>
+                <div class="align-items-center col">
+                    <button data-bs-toggle="modal" data-bs-target="#create-modal" class="float-end btn m-0 bg-gradient-primary">Create</button>
                 </div>
             </div>
             <hr class="bg-dark "/>
-            <table class="table" id="tableData">
+            <table class="table border" id="tableData">
                 <thead>
                   <tr class="bg-light">
                       <th>No</th>
@@ -70,21 +73,11 @@
         tableList.append(row)
     })
 
-    $('.editBtn').on('click', async function () {
-      
-      // Get the data-id attribute of the clicked button
-      let companyId = $(this).data('id');
-      
-      // Redirect the user to the edit route with the company ID as a parameter
-      window.location.href = `/AdminCompanies/edit/${companyId}`;
-    })
-    
-    $('.deleteBtn').on('click',function () {
-
-        let companyId = $(this).data('id');
-        window.location.href = `/AdminCompanies/delete/${companyId}`;
-
-    })
+    // $('.editBtn').on('click', async function () {
+    //     let id= $(this).data('id');
+    //     await FillUpUpdateForm(id)
+    //     $("#update-modal").modal('show');
+    // })
 
     new DataTable('#tableData',{
         order:[[0,'desc']],

@@ -17,3 +17,9 @@
 
 {{-- toster --}}
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<link href="{{asset('assets2/css/jquery.dataTables.min.css')}}" rel="stylesheet" />
+<script src="{{asset('assets2/js/jquery-3.7.0.min.js')}}"></script>
+<script src="{{asset('assets2/js/jquery.dataTables.min.js')}}"></script>
+
+<script src="{{asset('assets2/js/axios.min.js')}}"></script>

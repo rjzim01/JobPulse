@@ -35,7 +35,11 @@ class CompaniesController extends Controller
 
         return redirect()->route('CompanyInfo')->with('success', 'Company Info Updated Successfully');
     }
-
+    public function AdminCompanie()
+    {
+        //$companies = User::where('roll', 'Company')->get();
+        return User::where('roll', 'Company')->get();
+    }
     public function AdminCompanies()
     {
         $cUId = auth()->user()->id;

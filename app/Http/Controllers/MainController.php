@@ -47,6 +47,10 @@ class MainController extends Controller
 
         //return $jobs;
     }
+    public function homeApi()
+    {
+        return jobs::with('company')->where('status', 'Active')->get();
+    }
     public function HomePageAdmin()
     {
         $cUId = auth()->user()->id;

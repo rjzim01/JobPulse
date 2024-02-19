@@ -96,17 +96,24 @@
 
       {{-- ---All--- --}}
 
-      <div id="all_Job_Section" class="m-3 p-3 border" style="background: rgb(235, 235, 235); display: block; min-height: 800px;">
+      <div id="all_Job_Section" class="m-3 p-3 border"
+        style="background: rgb(235, 235, 235); display: block; min-height: 800px;">
+
         <div class="search-box m-3 text-end">
-          <input type="text" id="searchInput" oninput="searchJobs()" placeholder="Search Jobs">
+          <input type="text" placeholder="Search Jobs">
         </div>
+
         @foreach ($jobs as $job)
-        <div class="row m-3 p-4 border job-card" style="background: rgb(255, 255, 255)">
+
+        <div class="row m-3 p-4 border" style="background: rgb(255, 255, 255)">
+
           <div class="col-5">
             <div class="row">
               <div class="col-5 font-weight-bold">{{ $job->title }}</div>
-              <div class="col-3 ms-2 me-1 mb-1" style="background: rgb(235, 235, 235);">{{ $job->type ?? 'Unknown' }}</div>
-              <div class="col-3 mb-1" style="background: rgb(235, 235, 235);">{{ $job->company->name ?? 'Unknown' }}</div>
+              <div class="col-3 ms-2 me-1 mb-1" style="background: rgb(235, 235, 235);">{{ $job->type ?? 'Unknown' }}
+              </div>
+              <div class="col-3 mb-1" style="background: rgb(235, 235, 235);">{{ $job->company->name ?? 'Unknown' }}
+              </div>
             </div>
             <div class="row">
               <div class="col-2" style="background: rgb(235, 235, 235);">sql</div>
@@ -115,6 +122,7 @@
               <div class="col-3" style="background: rgb(235, 235, 235);">React</div>
             </div>
           </div>
+
           <div class="col-7 justify-content-end text-end">
             @if (Auth::check())
             @if (Auth::user()->roll === 'Candidate')
@@ -131,26 +139,36 @@
             @endif
             <div>1000$</div>
           </div>
+
         </div>
+
         @endforeach
-        <div class="d-flex justify-content-center" style="position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%);">
+
+        <div class="d-flex justify-content-center">
           <a href="{{ route('JobPage') }}" rel="noopener noreferrer" class="bg-light p-3"> View More</a>
         </div>
-        <div class="d-flex justify-content-end" style="position: fixed; bottom: 20px; right: 50px;">
+
+        <div class="d-flex justify-content-end">
           {{ $jobs->links() }}
         </div>
+
       </div>
 
       {{-- ---------- --}}
 
       {{-- Developers --}}
 
-      <div id="developers_Job_Section" class="m-3 p-3 border" style="background: rgb(235, 235, 235); display: none; min-height: 800px;">
+      <div id="developers_Job_Section" class="m-3 p-3 border"
+        style="background: rgb(235, 235, 235); display: none; min-height: 800px;">
+
         <div class="search-box m-3 text-end">
-          <input type="text" id="searchInput1" oninput="searchJobs1()" placeholder="Search Jobs">
+          <input type="text" placeholder="Search Jobs">
         </div>
+
         @foreach ($developerJobShow as $job)
-        <div class="row m-3 p-4 border job-card1" style="background: rgb(255, 255, 255);">
+
+        <div class="row m-3 p-4 border" style="background: rgb(255, 255, 255);">
+
           <div class="col-5">
             <div class="row">
               <div class="col-5 font-weight-bold">{{ $job->title }}</div>
@@ -166,6 +184,7 @@
               <div class="col-3" style="background: rgb(235, 235, 235);">React</div>
             </div>
           </div>
+
           <div class="col-7 justify-content-end text-end">
             @if (Auth::check())
             @if (Auth::user()->roll === 'Candidate')
@@ -183,25 +202,34 @@
             <div>1000$</div>
           </div>
         </div>
+
         @endforeach
-        <div class="d-flex justify-content-center" style="position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%);">
+
+        <div class="d-flex justify-content-center">
           <a href="{{ route('JobPage') }}" rel="noopener noreferrer" class="bg-light p-3"> View More</a>
         </div>
-        <div class="d-flex justify-content-end" style="position: fixed; bottom: 20px; right: 50px;">
+
+        <div class="d-flex justify-content-end">
           {{ $developerJobShow->links() }}
         </div>
+
       </div>
 
       {{-- ---------- --}}
 
       {{-- Designers --}}
 
-      <div id="designers_Job_Section" class="m-3 p-3 border" style="background: rgb(235, 235, 235); display: none; min-height: 800px;">
+      <div id="designers_Job_Section" class="m-3 p-3 border"
+        style="background: rgb(235, 235, 235); display: none; min-height: 800px;">
+
         <div class="search-box m-3 text-end">
-          <input type="text" id="searchInput2" oninput="searchJobs2()" placeholder="Search Jobs">
+          <input type="text" placeholder="Search Jobs">
         </div>
+
         @foreach ($designerJobShow as $job)
-        <div class="row m-3 p-4 border job-card2" style="background: rgb(255, 255, 255);">
+
+        <div class="row m-3 p-4 border" style="background: rgb(255, 255, 255);">
+
           <div class="col-5">
             <div class="row">
               <div class="col-5 font-weight-bold">{{ $job->title }}</div>
@@ -217,6 +245,7 @@
               <div class="col-3" style="background: rgb(235, 235, 235);">React</div>
             </div>
           </div>
+
           <div class="col-7 justify-content-end text-end">
             @if (Auth::check())
             @if (Auth::user()->roll === 'Candidate')
@@ -234,25 +263,34 @@
             <div>1000$</div>
           </div>
         </div>
+
         @endforeach
-        <div class="d-flex justify-content-center" style="position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%);">
+
+        <div class="d-flex justify-content-center">
           <a href="{{ route('JobPage') }}" rel="noopener noreferrer" class="bg-light p-3"> View More</a>
         </div>
-        <div class="d-flex justify-content-end" style="position: fixed; bottom: 20px; right: 50px;">
+
+        <div class="d-flex justify-content-end">
           {{ $designerJobShow->links() }}
         </div>
+
       </div>
 
       {{-- ---------- --}}
 
       {{-- Marketers --}}
 
-      <div id="marketers_Job_Section" class="m-3 p-3 border" style="background: rgb(235, 235, 235); display: none; min-height: 800px;">
+      <div id="marketers_Job_Section" class="m-3 p-3 border"
+        style="background: rgb(235, 235, 235); display: none; min-height: 800px;">
+
         <div class="search-box m-3 text-end">
-          <input type="text" id="searchInput3" oninput="searchJobs3()" placeholder="Search Jobs">
+          <input type="text" placeholder="Search Jobs">
         </div>
+
         @foreach ($marketingJobShow as $job)
-        <div class="row m-3 p-4 border job-card3" style="background: rgb(255, 255, 255);">
+
+        <div class="row m-3 p-4 border" style="background: rgb(255, 255, 255);">
+
           <div class="col-5">
             <div class="row">
               <div class="col-5 font-weight-bold">{{ $job->title }}</div>
@@ -268,6 +306,7 @@
               <div class="col-3" style="background: rgb(235, 235, 235);">React</div>
             </div>
           </div>
+
           <div class="col-7 justify-content-end text-end">
             @if (Auth::check())
             @if (Auth::user()->roll === 'Candidate')
@@ -285,25 +324,34 @@
             <div>1000$</div>
           </div>
         </div>
+
         @endforeach
-        <div class="d-flex justify-content-center" style="position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%);">
+
+        <div class="d-flex justify-content-center">
           <a href="{{ route('JobPage') }}" rel="noopener noreferrer" class="bg-light p-3"> View More</a>
         </div>
-        <div class="d-flex justify-content-end" style="position: fixed; bottom: 20px; right: 50px;">
+
+        <div class="d-flex justify-content-end">
           {{ $marketingJobShow->links() }}
         </div>
+
       </div>
 
       {{-- ---------- --}}
 
       {{-- UI/UX --}}
 
-      <div id="uiux_Job_Section" class="m-3 p-3 border" style="background: rgb(235, 235, 235); display: none; min-height: 800px;">
+      <div id="uiux_Job_Section" class="m-3 p-3 border"
+        style="background: rgb(235, 235, 235); display: none; min-height: 800px;">
+
         <div class="search-box m-3 text-end">
-          <input type="text" id="searchInput4" oninput="searchJobs4()" placeholder="Search Jobs">
+          <input type="text" placeholder="Search Jobs">
         </div>
+
         @foreach ($uiuxJobShow as $job)
-        <div class="row m-3 p-4 border job-card4" style="background: rgb(255, 255, 255);">
+
+        <div class="row m-3 p-4 border" style="background: rgb(255, 255, 255);">
+
           <div class="col-5">
             <div class="row">
               <div class="col-5 font-weight-bold">{{ $job->title }}</div>
@@ -319,6 +367,7 @@
               <div class="col-3" style="background: rgb(235, 235, 235);">React</div>
             </div>
           </div>
+
           <div class="col-7 justify-content-end text-end">
             @if (Auth::check())
             @if (Auth::user()->roll === 'Candidate')
@@ -336,25 +385,34 @@
             <div>1000$</div>
           </div>
         </div>
+
         @endforeach
-        <div class="d-flex justify-content-center" style="position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%);">
+
+        <div class="d-flex justify-content-center">
           <a href="{{ route('JobPage') }}" rel="noopener noreferrer" class="bg-light p-3"> View More</a>
         </div>
-        <div class="d-flex justify-content-end" style="position: fixed; bottom: 20px; right: 50px;">
+
+        <div class="d-flex justify-content-end">
           {{ $uiuxJobShow->links() }}
         </div>
+
       </div>
 
       {{-- ---------- --}}
 
       {{-- Others --}}
 
-      <div id="others_Job_Section" class="m-3 p-3 border" style="background: rgb(235, 235, 235); display: none; min-height: 800px;">
+      <div id="others_Job_Section" class="m-3 p-3 border"
+        style="background: rgb(235, 235, 235); display: none; min-height: 800px;">
+
         <div class="search-box m-3 text-end">
-          <input type="text" id="searchInput5" oninput="searchJobs5()" placeholder="Search Jobs">
+          <input type="text" placeholder="Search Jobs">
         </div>
+
         @foreach ($otherJobShow as $job)
-        <div class="row m-3 p-4 border job-card5" style="background: rgb(255, 255, 255);">
+
+        <div class="row m-3 p-4 border" style="background: rgb(255, 255, 255);">
+
           <div class="col-5">
             <div class="row">
               <div class="col-5 font-weight-bold">{{ $job->title }}</div>
@@ -370,6 +428,7 @@
               <div class="col-3" style="background: rgb(235, 235, 235);">React</div>
             </div>
           </div>
+
           <div class="col-7 justify-content-end text-end">
             @if (Auth::check())
             @if (Auth::user()->roll === 'Candidate')
@@ -387,13 +446,17 @@
             <div>1000$</div>
           </div>
         </div>
+
         @endforeach
-        <div class="d-flex justify-content-center" style="position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%);">
+
+        <div class="d-flex justify-content-center">
           <a href="{{ route('JobPage') }}" rel="noopener noreferrer" class="bg-light p-3"> View More</a>
         </div>
-        <div class="d-flex justify-content-end" style="position: fixed; bottom: 20px; right: 50px;">
+
+        <div class="d-flex justify-content-end">
           {{ $otherJobShow->links() }}
         </div>
+
       </div>
 
       {{-- ---------- --}}
@@ -459,90 +522,6 @@
 
   //////////////////////////////////////////////////////////////////////////////////////
 
-  function searchJobs() {
-    const input = document.getElementById('searchInput');
-    const filter = input.value.toLowerCase();
-    const jobCards = document.getElementsByClassName('job-card');
-
-    for (let i = 0; i < jobCards.length; i++) {
-      const title = jobCards[i].getElementsByClassName('font-weight-bold')[0];
-      if (title.innerText.toLowerCase().indexOf(filter) > -1) {
-        jobCards[i].style.display = "";
-      } else {
-        jobCards[i].style.display = "none";
-      }
-    }
-  }
-  function searchJobs1() {
-    const input = document.getElementById('searchInput1');
-    const filter = input.value.toLowerCase();
-    const jobCards = document.getElementsByClassName('job-card1');
-
-    for (let i = 0; i < jobCards.length; i++) {
-      const title = jobCards[i].getElementsByClassName('font-weight-bold')[0];
-      if (title.innerText.toLowerCase().indexOf(filter) > -1) {
-        jobCards[i].style.display = "";
-      } else {
-        jobCards[i].style.display = "none";
-      }
-    }
-  }
-  function searchJobs2() {
-    const input = document.getElementById('searchInput2');
-    const filter = input.value.toLowerCase();
-    const jobCards = document.getElementsByClassName('job-card2');
-
-    for (let i = 0; i < jobCards.length; i++) {
-      const title = jobCards[i].getElementsByClassName('font-weight-bold')[0];
-      if (title.innerText.toLowerCase().indexOf(filter) > -1) {
-        jobCards[i].style.display = "";
-      } else {
-        jobCards[i].style.display = "none";
-      }
-    }
-  }
-  function searchJobs3() {
-    const input = document.getElementById('searchInput3');
-    const filter = input.value.toLowerCase();
-    const jobCards = document.getElementsByClassName('job-card3');
-
-    for (let i = 0; i < jobCards.length; i++) {
-      const title = jobCards[i].getElementsByClassName('font-weight-bold')[0];
-      if (title.innerText.toLowerCase().indexOf(filter) > -1) {
-        jobCards[i].style.display = "";
-      } else {
-        jobCards[i].style.display = "none";
-      }
-    }
-  }
-  function searchJobs4() {
-    const input = document.getElementById('searchInput4');
-    const filter = input.value.toLowerCase();
-    const jobCards = document.getElementsByClassName('job-card4');
-
-    for (let i = 0; i < jobCards.length; i++) {
-      const title = jobCards[i].getElementsByClassName('font-weight-bold')[0];
-      if (title.innerText.toLowerCase().indexOf(filter) > -1) {
-        jobCards[i].style.display = "";
-      } else {
-        jobCards[i].style.display = "none";
-      }
-    }
-  }
-  function searchJobs5() {
-    const input = document.getElementById('searchInput5');
-    const filter = input.value.toLowerCase();
-    const jobCards = document.getElementsByClassName('job-card5');
-
-    for (let i = 0; i < jobCards.length; i++) {
-      const title = jobCards[i].getElementsByClassName('font-weight-bold')[0];
-      if (title.innerText.toLowerCase().indexOf(filter) > -1) {
-        jobCards[i].style.display = "";
-      } else {
-        jobCards[i].style.display = "none";
-      }
-    }
-  }
 
 </script>
 

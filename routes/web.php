@@ -54,6 +54,7 @@ Route::get('/error', function () {
 
 ////////////////////////////////----------Pages----------///////////////////////////////////////////////////////////////////////////
 Route::get('/', [MainController::class, 'home'])->name('home');
+Route::get('/homeApi', [MainController::class, 'homeApi'])->name('homeApi');
 Route::get('/about', [MainController::class, 'AboutPage'])->name('AboutPage');
 Route::get('/jobs', [MainController::class, 'JobPage'])->name('JobPage');
 Route::get('/blog', [MainController::class, 'BlogPage'])->name('BlogPage');
@@ -66,10 +67,15 @@ Route::middleware('auth')->group(function () {
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 });
 
+Route::get('/AdminCompanie', [CompaniesController::class, 'AdminCompanie'])->name('AdminCompanie');
+
 /////////////////////////////////------Admin-------//////////////////////////////////////////////////////////////////////////////////
 Route::middleware(['auth', 'roll:Admin'])->group(function () {
     Route::get('/AdminDashboard', [DashBoardController::class, 'AdminDashboard'])->name('AdminDashboard');
+
     Route::get('/AdminCompanies', [CompaniesController::class, 'AdminCompanies'])->name('AdminCompanies');
+    // Route::get('/AdminCompanie', [CompaniesController::class, 'AdminCompanie'])->name('AdminCompanie');
+
     Route::get('/AdminCompanies/edit/{id}', [CompaniesController::class, 'AdminCompaniesEdit'])->name('AdminCompaniesEdit');
     Route::post('/AdminCompanies/edit/{id}', [CompaniesController::class, 'AdminCompaniesEditStore'])->name('AdminCompaniesEditStore');
     Route::get('/AdminCompanies/delete/{id}', [CompaniesController::class, 'AdminCompaniesDelete'])->name('AdminCompaniesDelete');
@@ -109,8 +115,10 @@ Route::middleware(['auth', 'roll:Company'])->group(function () {
     Route::get('/CompanyJobs', [JobsController::class, 'CompanyJobsShow'])->name('CompanyJobsShow');
     Route::get('/CompanyJobs/create', [JobsController::class, 'CompanyJobsCreate'])->name('CompanyJobsCreate');
     Route::post('/CompanyJobs/create', [JobsController::class, 'CompanyJobsStore'])->name('CompanyJobsStore');
+
     Route::get('/CompanyJob/{jobId}', [JobsController::class, 'CompanyJobView'])->name('CompanyJobView');
     Route::post('/CompanyJob/{jobId}', [JobsController::class, 'CompanyJobViewUpdate'])->name('CompanyJobViewUpdate');
+
     Route::get('/CompanyJob/delete/{jobId}', [JobsController::class, 'CompanyJobDelete'])->name('CompanyJobDelete');
     Route::get('/CompanyApply/{jobId}', [JobsController::class, 'CompanyApply'])->name('CompanyApply');
     Route::get('/CompanyApplyUser/{jobId}/{userId}', [JobsController::class, 'CompanyApplyUser'])->name('CompanyApplyUser');
