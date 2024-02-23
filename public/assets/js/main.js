@@ -56,113 +56,7 @@
     window.addEventListener('load', toggleBacktotop)
     onscroll(document, toggleBacktotop)
   }
-  ////////////////////////////////////////////////////////////////////////////
-  // whats button
-  ////////////////////////////////////////////////////////////////////////////
-  // const whatsapp = document.querySelector('.whatsapp4');
-  // const newButton = document.getElementById('newButton');
-
-  // if (whatsapp && newButton) {
-  //   const checkScroll = () => {
-  //     const isScrollGreaterThan100 = window.scrollY > 100;
-  //     whatsapp.classList.toggle('active', isScrollGreaterThan100);
-  //     newButton.style.display = (isScrollGreaterThan100 && !whatsapp.classList.contains('active')) ? 'block' : 'none';
-  //   };
-
-  //   const openNewButton = () => {
-  //     newButton.style.display = (newButton.style.display === 'none') ? 'block' : 'none';
-  //   };
-
-  //   window.addEventListener('load', checkScroll);
-  //   window.addEventListener('scroll', checkScroll);
-  //   whatsapp.addEventListener('click', openNewButton);
-  // }
-
-  ////////////////////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////////////////
   
-  // let backtotop = select('.back-to-top')
-  const whatsappButton = document.querySelector('.whatsapp-button');
-  const whatsappWindow = document.querySelector('.whatsapp-window');
-  const whatsappWindowCross = document.querySelector('.bi-x-circle');
-  
-  if(whatsappButton){
-    const openWhatsappWindow = () => {
-        whatsappWindow.style.display = 'block';
-        whatsappButton.classList.add('stop-animation');
-    };
-    const closeWhatsappWindow = () => {
-        whatsappWindow.style.display = 'none';
-        whatsappButton.classList.remove('stop-animation');
-    };
-    
-    whatsappButton.addEventListener('click', openWhatsappWindow);
-    whatsappWindowCross.addEventListener('click', closeWhatsappWindow);
-  }
-
-  ////////////////////////////////////////////////////////////////////////////
-  // whats button end
-  ////////////////////////////////////////////////////////////////////////////
-
-  ////////////////////////////////////////////////////////////////////////////
-  // ui button
-  ////////////////////////////////////////////////////////////////////////////
-  const uiButton = document.querySelector('.ui');
-  const header = document.getElementById('header');
-  const footer = document.getElementById('footer');
-  const body = document.body;
-
-  if(uiButton){
-    const switchUi = () => {
-        header.classList.toggle('active');
-        footer.classList.toggle('active');
-        body.classList.toggle('active');
-        // Store the current theme preference in localStorage
-        const isDarkModeEnabled = body.classList.contains('active');
-        localStorage.setItem('theme', isDarkModeEnabled ? 'dark' : 'light');
-
-        // Update button text based on theme
-        uiButton.textContent = isDarkModeEnabled ? 'Light' : 'Dark';
-
-        // Toggle active class on navbar links
-        const navbarLinks = document.querySelectorAll('.navbar a');
-        navbarLinks.forEach(link => {
-            link.classList.toggle('active', isDarkModeEnabled);
-        });
-    };
-    
-    uiButton.addEventListener('click', switchUi);
-
-    // Check if a theme preference is stored in localStorage
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-        // Apply the saved theme
-        // if (savedTheme === 'dark') {
-        //     header.classList.add('active');
-        //     footer.classList.add('active');
-        //     body.classList.add('active');
-        // }
-        if (savedTheme) {
-          // Apply the saved theme
-          const isDarkModeEnabled = savedTheme === 'dark';
-          header.classList.toggle('active', isDarkModeEnabled);
-          footer.classList.toggle('active', isDarkModeEnabled);
-          body.classList.toggle('active', isDarkModeEnabled);
-  
-          // Update button text based on theme
-          uiButton.textContent = isDarkModeEnabled ? 'Light' : 'Dark';
-
-          // Apply active class to navbar links
-          const navbarLinks = document.querySelectorAll('.navbar a');
-          navbarLinks.forEach(link => {
-              link.classList.toggle('active', isDarkModeEnabled);
-          });
-      }
-    }
-  }
-  ////////////////////////////////////////////////////////////////////////////
-  // ui button end
-  ////////////////////////////////////////////////////////////////////////////
 
   /**
    * Mobile nav toggle
@@ -234,6 +128,17 @@
     })
   });
 
+  /**
+   * Add active class to current navigation link
+   */
+  const currentLocation = window.location.href;
+  const navLinks = select('#navbar ul li a', true);
+  navLinks.forEach(link => {
+    if (link.href === currentLocation) {
+      link.classList.add('active');
+    }
+  });
+  
   /**
    * Initiate Pure Counter 
    */

@@ -67,26 +67,40 @@ Route::middleware('auth')->group(function () {
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 });
 
-Route::get('/AdminCompanie', [CompaniesController::class, 'AdminCompanie'])->name('AdminCompanie');
+//Route::get('/AdminCompanie', [CompaniesController::class, 'AdminCompanie'])->name('AdminCompanie');
 
 /////////////////////////////////------Admin-------//////////////////////////////////////////////////////////////////////////////////
-Route::middleware(['auth', 'roll:Admin'])->group(function () {
+//Route::middleware(['auth', 'roll:Admin'])->group(function () {
+Route::middleware(['auth', 'roll:Admin|Editor|Manager'])->group(function () {
+    Route::get('/Admin/Profile', [UserController::class, 'AdminProfile'])->name('AdminProfile');
+
     Route::get('/AdminDashboard', [DashBoardController::class, 'AdminDashboard'])->name('AdminDashboard');
 
     Route::get('/AdminCompanies', [CompaniesController::class, 'AdminCompanies'])->name('AdminCompanies');
-    // Route::get('/AdminCompanie', [CompaniesController::class, 'AdminCompanie'])->name('AdminCompanie');
+    Route::get('/AdminCompanie', [CompaniesController::class, 'AdminCompanie'])->name('AdminCompanie');
 
     Route::get('/AdminCompanies/edit/{id}', [CompaniesController::class, 'AdminCompaniesEdit'])->name('AdminCompaniesEdit');
     Route::post('/AdminCompanies/edit/{id}', [CompaniesController::class, 'AdminCompaniesEditStore'])->name('AdminCompaniesEditStore');
     Route::get('/AdminCompanies/delete/{id}', [CompaniesController::class, 'AdminCompaniesDelete'])->name('AdminCompaniesDelete');
+
+    Route::get('/Api/Admin/Jobs', [JobsController::class, 'ApiAdminJobs'])->name('ApiAdminJobs');
     Route::get('/AdminJobs', [JobsController::class, 'AdminJobs'])->name('AdminJobs');
     Route::get('/AdminJobs/edit/{id}', [JobsController::class, 'AdminJobsEdit'])->name('AdminJobsEdit');
     Route::post('/AdminJobs/edit/{id}', [JobsController::class, 'AdminJobsEditStore'])->name('AdminJobsEditStore');
+
+    Route::get('/Api/Admin/Roll', [UserController::class, 'ApiAdminRollPermission'])->name('ApiAdminRollPermission');
     Route::get('/AdminRoll', [UserController::class, 'AdminRollPermission'])->name('AdminRollPermission');
     Route::get('/AdminRoll/edit/{id}', [UserController::class, 'AdminRollPermissionEdit'])->name('AdminRollPermissionEdit');
     Route::post('/AdminRoll/edit/{id}', [UserController::class, 'AdminRollPermissionStore'])->name('AdminRollPermissionStore');
-    Route::get('/Admin/Profile', [UserController::class, 'AdminProfile'])->name('AdminProfile');
 
+    Route::get('/Admin/Employee/Create', [UserController::class, 'AdminEmployeeCreate'])->name('AdminEmployeeCreate');
+    Route::post('/Admin/Employee/Create', [UserController::class, 'AdminEmployeeStore'])->name('AdminEmployeeStore');
+    Route::get('/api/Admin/Employee', [UserController::class, 'ApiAdminEmployee'])->name('ApiAdminEmployee');
+    Route::get('/Admin/Employee', [UserController::class, 'AdminEmployee'])->name('AdminEmployee');
+    Route::get('/Admin/Employee/{userId}', [UserController::class, 'AdminEmployeeEdit'])->name('AdminEmployeeEdit');
+    Route::post('/Admin/Employee/{userId}', [UserController::class, 'AdminEmployeeUpdate'])->name('AdminEmployeeUpdate');
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     Route::get('/AdminHome', [MainController::class, 'HomePageAdmin'])->name('HomePageAdmin');
     Route::post('/AdminHome', [MainController::class, 'HomePageStoreAdmin'])->name('HomePageStoreAdmin');
 
@@ -106,7 +120,8 @@ Route::middleware(['auth', 'roll:Admin'])->group(function () {
 });
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////------Company-------//////////////////////////////////////////////////////////////////////////////
-Route::middleware(['auth', 'roll:Company'])->group(function () {
+//Route::middleware(['auth', 'roll:Company'])->group(function () {
+Route::middleware(['auth', 'roll:Company|Company_Editor|Company_Manager'])->group(function () {
     Route::get('/CompanyDashboard', [DashBoardController::class, 'CompanyDashboard'])->name('CompanyDashboard');
 
     Route::get('/CompanyInfo', [CompaniesController::class, 'CompanyInfo'])->name('CompanyInfo');
@@ -124,6 +139,15 @@ Route::middleware(['auth', 'roll:Company'])->group(function () {
     Route::get('/CompanyApplyUser/{jobId}/{userId}', [JobsController::class, 'CompanyApplyUser'])->name('CompanyApplyUser');
     Route::get('/Company/Profile', [UserController::class, 'CompanyProfile'])->name('CompanyProfile');
     Route::get('/Company/Plugin', [DashBoardController::class, 'CompanyPlugin'])->name('CompanyPlugin');
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    Route::get('/Company/Employee/Create', [UserController::class, 'CompanyEmployeeCreate'])->name('CompanyEmployeeCreate');
+    Route::post('/Company/Employee/Create', [UserController::class, 'CompanyEmployeeStore'])->name('CompanyEmployeeStore');
+    Route::get('/api/Company/Employee', [UserController::class, 'ApiCompanyEmployee'])->name('ApiCompanyEmployee');
+    Route::get('/Company/Employee', [UserController::class, 'CompanyEmployee'])->name('CompanyEmployee');
+    Route::get('/Company/Employee/{userId}', [UserController::class, 'CompanyEmployeeEdit'])->name('CompanyEmployeeEdit');
+    Route::post('/Company/Employee/{userId}', [UserController::class, 'CompanyEmployeeUpdate'])->name('CompanyEmployeeUpdate');
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 });
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////------Candidate-------/////////////////////////////////////////////////////

@@ -159,6 +159,10 @@ class JobsController extends Controller
         return view('template.DashBoard.Company.6_Company_Apply_User', compact('job', 'user', 'profileData', 'profileDetailData', 'profileEducationData', 'trainingData', 'experienceData'));
         //return $user;
     }
+    public function ApiAdminJobs()
+    {
+        return jobs::all();
+    }
     public function AdminJobs()
     {
         $cUId = auth()->user()->id;

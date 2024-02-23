@@ -11,6 +11,95 @@ use App\Models\Course;
 
 class UserController extends Controller
 {
+    public function CompanyEmployeeCreate()
+    {
+        $profileData = User::where('id', Auth::user()->id)->first();
+        return view('template.DashBoard.Company.11_Company_Employee_Create', compact('profileData'));
+    }
+    public function CompanyEmployeeStore(Request $request)
+    {
+        $user = new User();
+        $user->email = $request->input('email');
+        $user->roll = $request->input('roll');
+        $user->password = Hash::make(111);
+        $user->company_identifier = User::where('id', Auth::user()->id)->pluck('name')->first();
+        $user->save();
+
+        return redirect()->back()->with('success', 'User Created Successfully');
+    }
+    public function ApiCompanyEmployee()
+    {
+        $company = User::where('id', Auth::user()->id)->pluck('name')->first();
+        if (Auth::user()->roll === 'Company') {
+            return User::where('company_identifier', $company)->get();
+        } elseif (Auth::user()->roll === 'Company_Manager') {
+            return User::where('roll', 'Company_Editor')->get();
+        }
+    }
+    public function CompanyEmployee()
+    {
+        //$user = User::where('id', Auth::user()->id)->pluck('name')->first();
+        //return $user;
+        $profileData = User::where('id', Auth::user()->id)->first();
+        return view('template.DashBoard.Company.10_Company_Employee', compact('profileData'));
+    }
+    public function CompanyEmployeeEdit($userId)
+    {
+        $profileData = User::where('id', Auth::user()->id)->first();
+        $user = User::where('id', $userId)->first();
+        return view('template.DashBoard.Company.12_Company_Employee_Edit', compact('user', 'profileData'));
+        //return $user;
+    }
+    public function CompanyEmployeeUpdate(Request $request, $userId)
+    {
+        User::where('id', $userId)->update([
+            'email' => $request->email,
+            'roll' => $request->roll,
+            'company_identifier' => $request->company_identifier,
+        ]);
+        return redirect()->back()->with('success', 'Updated Successfully');
+    }
+    /////////////////////////////////////////////////////////////////////////////////////////////
+    public function AdminEmployeeCreate()
+    {
+        $profileData = User::where('id', Auth::user()->id)->first();
+        return view('template.DashBoard.Admin.16_Admin_Employee_Create', compact('profileData'));
+    }
+    public function AdminEmployeeStore(Request $request)
+    {
+        $user = new User();
+        $user->email = $request->input('email');
+        $user->roll = $request->input('roll');
+        $user->password = Hash::make(111);
+        $user->save();
+
+        return redirect()->back()->with('success', 'User Created Successfully');
+    }
+    public function ApiAdminEmployee()
+    {
+        if (Auth::user()->roll === 'Admin') {
+            return User::where('roll', 'Manager')->orWhere('roll', 'Editor')->get();
+        } elseif (Auth::user()->roll === 'Manager') {
+            return User::where('roll', 'Editor')->get();
+        }
+        // return User::where('roll', 'Manager')->orWhere('roll', 'Editor')->get();
+    }
+    public function AdminEmployee()
+    {
+        $profileData = User::where('id', Auth::user()->id)->first();
+        return view('template.DashBoard.Admin.15_Admin_Employee', compact('profileData'));
+    }
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    public function ApiAdminRollPermission()
+    {
+        if (Auth::user()->roll === 'Admin') {
+            return User::all();
+        } elseif (Auth::user()->roll === 'Manager') {
+            //return User::where('roll', 'Editor')->get();
+            return User::where('roll', 'Candidate')->orWhere('roll', 'Editor')->get();
+        }
+        //return User::all();
+    }
     public function AdminRollPermission()
     {
         $id = Auth::user()->id;
@@ -38,7 +127,8 @@ class UserController extends Controller
         User::where('id', $id)->update([
             'roll' => $request->roll,
         ]);
-        return redirect()->route('AdminRollPermission')->with('success', 'Roll Updated Successfully');
+        //return redirect()->route('AdminRollPermission')->with('success', 'Roll Updated Successfully');
+        return redirect()->back()->with('success', 'Roll Updated Successfully');
     }
     public function AdminProfile()
     {
@@ -65,6 +155,7 @@ class UserController extends Controller
     {
         $id = Auth::user()->id;
         $data = User::find($id);
+        $data->name = $request->name;
         $data->first_name = $request->first_name;
         $data->last_name = $request->last_name;
 

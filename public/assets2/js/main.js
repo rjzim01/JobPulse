@@ -2,6 +2,7 @@
 (function() {
   "use strict";
 
+
   /**
    * Easy selector helper function
    */
@@ -544,5 +545,16 @@
       }).observe(mainContainer);
     }, 200);
   }
+
+  /**
+   * Add active class to current navigation link
+   */
+  const currentLocation = window.location.href;
+  const navLinks = select('.sidebar-nav .nav-link', true);
+  navLinks.forEach(link => {
+    if (link.href === currentLocation) {
+      link.classList.add('active');
+    }
+  });
 
 })();

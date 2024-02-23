@@ -8,158 +8,90 @@
       <h1>Jobs</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item">Home</li>
+          <li class="breadcrumb-item active">Home</li>
         </ol>
       </nav>
     </div>
 
-    <div class="text-center">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-lg-12">
+          <div class="card px-5 py-5">
+            {{-- <div class="row justify-content-between ">
+                <div class="align-items-center col">
+                    <h4>All User</h4>
+                </div>
+            </div> 
+            <hr class="bg-dark "/>
+            --}}
+            <table class="table" id="tableData">
+                <thead>
+                  <tr class="bg-light">
+                      <th>No</th>
+                      <th>Job Title</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="tableList">
 
-        <h4 style="text-align:right;">
-          <strong id="jobsSortByTitleBtn" style="background: rgb(233, 233, 233); color: black; padding: 0px 10px 0px 10px; cursor: pointer;">Title</strong>
-          <strong id="jobsSortByStatusBtn" style="background: rgb(233, 233, 233); color: black; padding: 0px 10px 0px 10px; cursor: pointer;">Status</strong>
-        </h4>
-
-        <div id="jobs" style="display: block">
-          <table class="table table-bordered table-custom">
-            <thead>
-              <tr>
-                <th>Job Title</th>
-                <th>Status</th>
-                <th>Edit/Delete</th>
-              </tr>
-            </thead>
-            <tbody>
-              @php
-                  
-              @endphp
-              @foreach($jobs as $job)
-                <tr>
-                  <td>{{ $job->title }}</td>
-                  <td>{{ $job->status }}</td>
-                  <td class="text-center">
-                    <span class="rounded" style="padding: 5px 20px 5px 23px; background: rgb(0, 255, 0); cursor: pointer; margin: 0px 2px 0px 0px;">
-                      <a href="{{ route('AdminJobsEdit', ['id'=>$job->id]) }}" style="text-decoration: none;  color:rgb(55, 55, 55);">Edit</a>
-                    </span>
-                    <span class="rounded" style="padding: 5px 10px 5px 10px; background: rgb(255, 0, 0); cursor: pointer; margin: 0px 0px 0px 2px;">
-                      <a href="{{ route('AdminCompaniesDelete', ['id'=>$job->id]) }}" style="text-decoration: none; color:rgb(0, 0, 0);">Delete</a>
-                    </span>
-                  </td>
-                </tr>
-              @endforeach
-            </tbody>
-          </table>
-
-          <div class="d-flex justify-content-end">
-            {{$jobs->links()}}
+                </tbody>
+            </table>
           </div>
         </div>
-
-        <div id="jobsSortByTitle" style="display: none">
-          <table class="table table-bordered table-custom">
-            <thead>
-              <tr>
-                <th>Job Title</th>
-                <th>Status</th>
-                <th>Edit/Delete</th>
-              </tr>
-            </thead>
-            <tbody>
-              @php
-                  
-              @endphp
-              @foreach($jobsSortByTitle as $job)
-                <tr>
-                  <td>{{ $job->title }}</td>
-                  <td>{{ $job->status }}</td>
-                  <td class="text-center">
-                    <span class="rounded" style="padding: 5px 20px 5px 23px; background: rgb(0, 255, 0); cursor: pointer; margin: 0px 2px 0px 0px;">
-                      <a href="{{ route('AdminJobsEdit', ['id'=>$job->id]) }}" style="text-decoration: none;  color:rgb(55, 55, 55);">Edit</a>
-                    </span>
-                    <span class="rounded" style="padding: 5px 10px 5px 10px; background: rgb(255, 0, 0); cursor: pointer; margin: 0px 0px 0px 2px;">
-                      <a href="{{ route('AdminCompaniesDelete', ['id'=>$job->id]) }}" style="text-decoration: none; color:rgb(0, 0, 0);">Delete</a>
-                    </span>
-                  </td>
-                </tr>
-              @endforeach
-            </tbody>
-          </table>
-
-          <div class="d-flex justify-content-end">
-            {{$jobsSortByTitle->links()}}
-          </div>
-        </div>
-
-        <div id="jobsSortByStatus" style="display: none">
-          <table class="table table-bordered table-custom">
-            <thead>
-              <tr>
-                <th>Job Title</th>
-                <th>Status</th>
-                <th>Edit/Delete</th>
-              </tr>
-            </thead>
-            <tbody>
-              @php
-                  
-              @endphp
-              @foreach($jobsSortByStatus as $job)
-                <tr>
-                  <td>{{ $job->title }}</td>
-                  <td>{{ $job->status }}</td>
-                  <td class="text-center">
-                    <span class="rounded" style="padding: 5px 20px 5px 23px; background: rgb(0, 255, 0); cursor: pointer; margin: 0px 2px 0px 0px;">
-                      <a href="{{ route('AdminJobsEdit', ['id'=>$job->id]) }}" style="text-decoration: none;  color:rgb(55, 55, 55);">Edit</a>
-                    </span>
-                    <span class="rounded" style="padding: 5px 10px 5px 10px; background: rgb(255, 0, 0); cursor: pointer; margin: 0px 0px 0px 2px;">
-                      <a href="{{ route('AdminCompaniesDelete', ['id'=>$job->id]) }}" style="text-decoration: none; color:rgb(0, 0, 0);">Delete</a>
-                    </span>
-                  </td>
-                </tr>
-              @endforeach
-            </tbody>
-          </table>
-
-          <div class="d-flex justify-content-end">
-            {{$jobsSortByStatus->links()}}
-          </div>
-        </div>
-
+      </div>
     </div>
 
 </main>
 
 <script>
-  function work(a, b, c, d) {
+  
+  getList();
 
-    var x = document.getElementById(a);
-    var y = document.getElementById(b);
-    var z = document.getElementById(c);
-    var w = document.getElementById(d);
+  async function getList() {
 
-    if (x.style.display === 'block') {
-      x.style.display = 'none';
-      y.style.display = 'block';
-      z.style.display = 'none';
-      w.style.background = 'rgb(100, 100, 100)';
-      w.style.color = 'white';
-    } else {
-      x.style.display = 'block';
-      y.style.display = 'none';
-      z.style.display = 'none';
-      w.style.background = 'rgb(233, 233, 233)';
-      w.style.color = 'black';
-    }
+    let res=await axios.get("/Api/Admin/Jobs");
+
+    let tableList=$("#tableList");
+    let tableData=$("#tableData");
+
+    tableData.DataTable().destroy();
+    tableList.empty();
+
+    res.data.forEach(function (item,index) {
+        let row=`<tr>
+                    <td>${index+1}</td>
+                    <td>${item['title']}</td>
+                    <td>${item['status']}</td>
+                    <td>
+                        <button data-id="${item['id']}" class="btn editBtn btn-sm btn-outline-success">Edit</button>
+                        <button data-id="${item['id']}" class="btn deleteBtn btn-sm btn-outline-danger">Delete</button>
+                    </td>
+                </tr>`
+        tableList.append(row)
+    })
+
+    $('.editBtn').on('click', async function () {
+      
+      // Get the data-id attribute of the clicked button
+      let Id = $(this).data('id');
+      
+      // Redirect the user to the edit route with the company ID as a parameter
+      window.location.href = `/AdminJobs/edit/${Id}`;
+    })
     
-  };
+    $('.deleteBtn').on('click',function () {
 
-  document.getElementById("jobsSortByTitleBtn").addEventListener("click", function() {
-    work("jobs", "jobsSortByTitle", "jobsSortByStatus", "jobsSortByTitleBtn");
-  });
+        let companyId = $(this).data('id');
+        window.location.href = `/AdminCompanies/delete/${companyId}`;
 
-  document.getElementById("jobsSortByStatusBtn").addEventListener("click", function() {
-    work("jobs", "jobsSortByStatus", "jobsSortByTitle", "jobsSortByStatusBtn");
-  });
+    })
+
+    new DataTable('#tableData',{
+        order:[[0,'desc']],
+        lengthMenu:[5,10,15,20,30]
+    });
+  }
 
 </script>
 

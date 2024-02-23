@@ -17,12 +17,14 @@
       <div class="row">
         <div class="col-md-12 col-sm-12 col-lg-12">
           <div class="card px-5 py-5">
+            {{--             
             <div class="row justify-content-between ">
                 <div class="align-items-center col">
                     <h4>Companies</h4>
                 </div>
             </div>
-            <hr class="bg-dark "/>
+            <hr class="bg-dark "/> 
+            --}}
             <table class="table" id="tableData">
                 <thead>
                   <tr class="bg-light">

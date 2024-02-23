@@ -37,7 +37,6 @@ class CompaniesController extends Controller
     }
     public function AdminCompanie()
     {
-        //$companies = User::where('roll', 'Company')->get();
         return User::where('roll', 'Company')->get();
     }
     public function AdminCompanies()

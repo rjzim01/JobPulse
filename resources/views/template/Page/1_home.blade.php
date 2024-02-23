@@ -109,10 +109,10 @@
               <div class="col-3 mb-1" style="background: rgb(235, 235, 235);">{{ $job->company->name ?? 'Unknown' }}</div>
             </div>
             <div class="row">
-              <div class="col-2" style="background: rgb(235, 235, 235);">sql</div>
-              <div class="col-3 ms-1 me-1" style="background: rgb(235, 235, 235);">Javascript</div>
-              <div class="col-3 me-1" style="background: rgb(235, 235, 235);">Vue</div>
-              <div class="col-3" style="background: rgb(235, 235, 235);">React</div>
+              <div class="col-2" style="background: rgb(235, 235, 235);">{{ $job->skill1 ?? '' }}</div>
+              <div class="col-3 ms-1 me-1" style="background: rgb(235, 235, 235);">{{ $job->skill2 ?? '' }}</div>
+              <div class="col-3 me-1" style="background: rgb(235, 235, 235);">{{ $job->skill3 ?? '' }}</div>
+              <div class="col-3" style="background: rgb(235, 235, 235);">{{ $job->skill4 ?? '' }}</div>
             </div>
           </div>
           <div class="col-7 justify-content-end text-end">
@@ -129,7 +129,7 @@
             @else
             <div><a href="{{ route('login') }}">Sign in to Apply</a></div>
             @endif
-            <div>1000$</div>
+            <div>{{ $job->salary ?? '' }} Bdt</div>
           </div>
         </div>
         @endforeach
@@ -180,7 +180,7 @@
             @else
             <div><a href="{{ route('login') }}">Sign in to Apply</a></div>
             @endif
-            <div>1000$</div>
+            <div>{{ $job->salary ?? '' }} Bdt</div>
           </div>
         </div>
         @endforeach
@@ -231,7 +231,7 @@
             @else
             <div><a href="{{ route('login') }}">Sign in to Apply</a></div>
             @endif
-            <div>1000$</div>
+            <div>{{ $job->salary ?? '' }} Bdt</div>
           </div>
         </div>
         @endforeach
@@ -282,7 +282,7 @@
             @else
             <div><a href="{{ route('login') }}">Sign in to Apply</a></div>
             @endif
-            <div>1000$</div>
+            <div>{{ $job->salary ?? '' }} Bdt</div>
           </div>
         </div>
         @endforeach
@@ -333,7 +333,7 @@
             @else
             <div><a href="{{ route('login') }}">Sign in to Apply</a></div>
             @endif
-            <div>1000$</div>
+            <div>{{ $job->salary ?? '' }} Bdt</div>
           </div>
         </div>
         @endforeach
@@ -384,7 +384,7 @@
             @else
             <div><a href="{{ route('login') }}">Sign in to Apply</a></div>
             @endif
-            <div>1000$</div>
+            <div>{{ $job->salary ?? '' }} Bdt</div>
           </div>
         </div>
         @endforeach
@@ -543,6 +543,7 @@
       }
     }
   }
+
 
 </script>
 

@@ -25,12 +25,14 @@
         <span>Blogs</span>
       </a>
     </li>
+    @if(Auth::user()->roll === 'Company' || Auth::user()->roll === 'Company_Manager')
     <li class="nav-item" id="side_bar_employee" style="display: block;">
-      <a class="nav-link collapsed" href="#">
+      <a class="nav-link collapsed" href="{{ route('CompanyEmployee') }}">
         <i class="bi bi-pencil-square"></i>
         <span>Employee</span>
       </a>
     </li>
+    @endif
     <li class="nav-item">
       <a class="nav-link collapsed" href="{{ route('CompanyPlugin') }}">
         <i class="bi bi-pencil-square"></i>

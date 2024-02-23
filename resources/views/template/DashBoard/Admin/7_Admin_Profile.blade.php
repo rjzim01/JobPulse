@@ -36,6 +36,15 @@
                     
                     <div class="row">
                         <div class="col-md-3">
+                            <label class="form-label">Name</label>
+                        </div>
+                        <div class="col-md-5">
+                            <input type="text" class="form-control"  value="{{ optional($profileDetailData)->name }}" name="name">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3">
                             <label class="form-label">First Name</label>
                         </div>
                         <div class="col-md-5">

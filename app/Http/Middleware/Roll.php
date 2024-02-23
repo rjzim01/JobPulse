@@ -8,16 +8,21 @@ use Symfony\Component\HttpFoundation\Response;
 
 class Roll
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
-     */
-    public function handle(Request $request, Closure $next, $roll): Response
+    // public function handle(Request $request, Closure $next, $roll): Response
+    // {
+    //     if ($request->user()->roll !== $roll) {
+    //         return redirect('error');
+    //     }
+    //     return $next($request);
+    // }
+    public function handle(Request $request, Closure $next, $roles)
     {
-        if ($request->user()->roll !== $roll) {
+        $allowedRoles = explode('|', $roles);
+
+        if (!in_array($request->user()->roll, $allowedRoles)) {
             return redirect('error');
         }
+
         return $next($request);
     }
 }

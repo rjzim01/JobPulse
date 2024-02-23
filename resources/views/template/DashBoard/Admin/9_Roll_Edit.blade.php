@@ -30,9 +30,16 @@
           <label for="course">Roll</label>
           <select class="form-control" name="roll">
               <option value="">Select Roll Current as ->{{ $user->roll }}</option>
-              <option value="Admin">Admin</option>
-              <option value="Company">Company</option>
-              <option value="Candidate">Candidate</option>
+              @if (Auth::user()->roll === 'Admin')
+                <option value="Editor">Editor</option>
+                <option value="Manager">Manager</option>
+                <option value="Company">Company</option>
+                <option value="Candidate">Candidate</option>
+              @elseif(Auth::user()->roll === 'Manager')
+                <option value="Editor">Editor</option>
+                <option value="Candidate">Candidate</option>
+              @endif
+              
           </select>
       </div>
 

@@ -10,7 +10,7 @@
   <meta content="" name="keywords">
 
   <link href="{{ asset('assets/img/study.jpg') }}" rel="icon">
-  <link href="{{ asset('assets/img/study.jpg') }}" rel="apple-touch-icon"> 
+  <link href="{{ asset('assets/img/study.jpg') }}" rel=""> 
 
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
@@ -58,9 +58,17 @@
       </nav>
 
       @if (Auth::check())
-        @if (Auth::user()->roll === 'Admin' )
+        @if (Auth::user()->roll === 'Admin'  )
+          <a href="{{ route('AdminDashboard') }}" class="get-started-btn-top" >DashBoard</a>
+        @elseif (Auth::user()->roll === 'Manager' )
+          <a href="{{ route('AdminDashboard') }}" class="get-started-btn-top" >DashBoard</a>
+        @elseif (Auth::user()->roll === 'Editor' )
           <a href="{{ route('AdminDashboard') }}" class="get-started-btn-top" >DashBoard</a>
         @elseif (Auth::user()->roll === 'Company' )
+          <a href="{{ route('CompanyDashboard') }}" class="get-started-btn-top" >DashBoard</a>
+        @elseif (Auth::user()->roll === 'Company_Manager' )
+          <a href="{{ route('CompanyDashboard') }}" class="get-started-btn-top" >DashBoard</a>
+        @elseif (Auth::user()->roll === 'Company_Editor' )
           <a href="{{ route('CompanyDashboard') }}" class="get-started-btn-top" >DashBoard</a>
         @else
           <a href="{{ route('CandidateDashboard') }}" class="get-started-btn-top" >DashBoard</a>
@@ -71,3 +79,4 @@
 
     </div>
   </header>
+

@@ -432,9 +432,9 @@ h6 {
   white-space: nowrap;
   transition: 0.3s;
 }
-.navbar a.active {
+/* .navbar a.active {
   color: #c4c4c4;
-}
+} */
 
 .navbar a i,
 .navbar a:focus i {
