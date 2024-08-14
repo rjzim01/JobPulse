@@ -10,19 +10,23 @@ class DashBoardController extends Controller
 {
     public function AdminDashboard()
     {
-        $cUId = auth()->user()->id;
-        $profileData = User::where('id', $cUId)->first();
-        $activeCompanies = User::where('roll', 'Company')
-            ->where('status', 'Active')
-            ->count();
+        try {
+            $cUId = auth()->user()->id;
+            $profileData = User::where('id', $cUId)->first();
+            $activeCompanies = User::where('roll', 'Company')
+                ->where('status', 'Active')
+                ->count();
 
-        $pendingCompanies = User::where('roll', 'Company')
-            ->where('status', 'Pending')
-            ->count();
+            $pendingCompanies = User::where('roll', 'Company')
+                ->where('status', 'Pending')
+                ->count();
 
-        $jobPosted = jobs::where('status', 'Active')->count();
+            $jobPosted = jobs::where('status', 'Active')->count();
 
-        return view('template.DashBoard.Admin.1_Admin_Dashboard', compact('activeCompanies', 'pendingCompanies', 'jobPosted', 'profileData'));
+            return view('template.DashBoard.Admin.1_Admin_Dashboard', compact('activeCompanies', 'pendingCompanies', 'jobPosted', 'profileData'));
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', 'Something wrong happened.');
+        }
     }
     public function CompanyDashboard()
     {
