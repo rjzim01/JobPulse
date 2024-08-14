@@ -1,66 +1,59 @@
 @include('template.DashBoard.Admin.0_Admin_Top')
 
-  @include('template.DashBoard.Admin.0_Admin_Side')
+@include('template.DashBoard.Admin.0_Admin_Side')
 
-  <main id="main" class="main" style="min-height: 610px">
+<main id="main" class="main" style="min-height: 610px">
 
     <div class="pagetitle">
-      <h1>Companies</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item active">Home</li>
-        </ol>
-      </nav>
+        <h1>Companies</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active">Home</li>
+            </ol>
+        </nav>
     </div>
 
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-12 col-sm-12 col-lg-12">
-          <div class="card px-5 py-5">
-            {{--             
-            <div class="row justify-content-between ">
-                <div class="align-items-center col">
-                    <h4>Companies</h4>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-lg-12">
+                <div class="card px-5 py-5">
+
+                    <table class="table" id="tableData">
+                        <thead>
+                            <tr class="bg-light">
+                                <th>No</th>
+                                <th>Name</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableList">
+
+                        </tbody>
+                    </table>
+
                 </div>
             </div>
-            <hr class="bg-dark "/> 
-            --}}
-            <table class="table" id="tableData">
-                <thead>
-                  <tr class="bg-light">
-                      <th>No</th>
-                      <th>Name</th>
-                      <th>Status</th>
-                      <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody id="tableList">
-
-                </tbody>
-            </table>
-          </div>
         </div>
-      </div>
     </div>
 
 </main>
 
 <script>
-  
-  getList();
+    getList();
 
-  async function getList() {
+    async function getList() {
 
-    let res=await axios.get("/AdminCompanie");
+        let res = await axios.get("/AdminCompanie");
 
-    let tableList=$("#tableList");
-    let tableData=$("#tableData");
+        let tableList = $("#tableList");
+        let tableData = $("#tableData");
 
-    tableData.DataTable().destroy();
-    tableList.empty();
+        tableData.DataTable().destroy();
+        tableList.empty();
 
-    res.data.forEach(function (item,index) {
-        let row=`<tr>
+        res.data.forEach(function(item, index) {
+            let row = `<tr>
                     <td>${index+1}</td>
                     <td>${item['name']}</td>
                     <td>${item['status']}</td>
@@ -69,31 +62,32 @@
                         <button data-id="${item['id']}" class="btn deleteBtn btn-sm btn-outline-danger">Delete</button>
                     </td>
                 </tr>`
-        tableList.append(row)
-    })
+            tableList.append(row)
+        })
 
-    $('.editBtn').on('click', async function () {
-      
-      // Get the data-id attribute of the clicked button
-      let companyId = $(this).data('id');
-      
-      // Redirect the user to the edit route with the company ID as a parameter
-      window.location.href = `/AdminCompanies/edit/${companyId}`;
-    })
-    
-    $('.deleteBtn').on('click',function () {
+        $('.editBtn').on('click', async function() {
 
-        let companyId = $(this).data('id');
-        window.location.href = `/AdminCompanies/delete/${companyId}`;
+            // Get the data-id attribute of the clicked button
+            let companyId = $(this).data('id');
 
-    })
+            // Redirect the user to the edit route with the company ID as a parameter
+            window.location.href = `/AdminCompanies/edit/${companyId}`;
+        })
 
-    new DataTable('#tableData',{
-        order:[[0,'desc']],
-        lengthMenu:[5,10,15,20,30]
-    });
-  }
+        $('.deleteBtn').on('click', function() {
 
+            let companyId = $(this).data('id');
+            window.location.href = `/AdminCompanies/delete/${companyId}`;
+
+        })
+
+        new DataTable('#tableData', {
+            order: [
+                [0, 'desc']
+            ],
+            lengthMenu: [5, 10, 15, 20, 30]
+        });
+    }
 </script>
 
 @include('template.DashBoard.Admin.0_Admin_Bottom')

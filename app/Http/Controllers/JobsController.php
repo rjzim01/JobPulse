@@ -15,6 +15,7 @@ class JobsController extends Controller
         $profileData = User::where('id', $cUId)->first();
 
         $jobs = ApplyJob::where('user_id', $cUId)->with('jobs')->paginate(10);
+        //$jobs = jobs::where('status', 'Active')->paginate(10);
         //$jobs = ApplyJob::where('user_id', $cUId)->with('jobs')->get();
         $jobsSortByName = ApplyJob::where('user_id', $cUId)
             ->with([
