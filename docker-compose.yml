@@ -1,0 +1,50 @@
+# Code is baked into the image, settings come from .env.
+# Rebuild after code changes: docker compose up -d --build
+services:
+  app:
+    build:
+      context: .
+      pull: true
+    image: jobpulse-app
+    container_name: jobpulse-app
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - "1004:80"
+    volumes:
+      - storage:/var/www/html/storage
+      - uploads:/var/www/html/public/upload
+    depends_on:
+      - db
+
+  db:
+    image: mariadb:10.11
+    container_name: jobpulse-db
+    restart: unless-stopped
+    # Compose fills these from .env; read on first start only (empty dbdata volume).
+    environment:
+      MARIADB_DATABASE: ${DB_DATABASE}
+      MARIADB_USER: ${DB_USERNAME}
+      MARIADB_PASSWORD: ${DB_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+    volumes:
+      - dbdata:/var/lib/mysql
+      - ./db/1-laravel_module_20_finalproject_jobpulse.sql:/docker-entrypoint-initdb.d/1-jobpulse.sql:ro
+
+  phpmyadmin:
+    image: phpmyadmin:5
+    container_name: jobpulse-phpmyadmin
+    restart: unless-stopped
+    ports:
+      - "1005:80"
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      UPLOAD_LIMIT: 64M
+    depends_on:
+      - db
+
+volumes:
+  dbdata:
+  storage:
+  uploads:
