@@ -26,7 +26,7 @@
                   <h5 class="card-title text-center">Blogs</h5>
                   <div class="row">
                     <div class="d-flex justify-content-end">
-                      <span id="toggle_button_blog" class="bg-light border rounded ps-1 pe-1" style="cursor: pointer;">Deactivate</span>
+                      <span id="toggle_button_blog" class="bg-light border rounded-sm ps-1 pe-1" style="cursor: pointer;">Deactivate</span>
                     </div>
                   </div>
                 </div>
@@ -39,7 +39,7 @@
                   <h5 class="card-title text-center">Employee</h5>
                     <div class="row">
                       <div class="d-flex justify-content-end">
-                        <span id="toggle_button_employee" class="bg-light border rounded ps-1 pe-1" style="cursor: pointer;">Deactivate</span>
+                        <span id="toggle_button_employee" class="bg-light border rounded-sm ps-1 pe-1" style="cursor: pointer;">Deactivate</span>
                       </div>
                     </div>
                 </div>
@@ -52,7 +52,7 @@
                   <h5 class="card-title text-center">Pages</h5>
                   <div class="row">
                     <div class="d-flex justify-content-end">
-                      <span id="toggle_button_pages" class="bg-light border rounded ps-1 pe-1" style="cursor: pointer;">Deactivate</span>
+                      <span id="toggle_button_pages" class="bg-light border rounded-sm ps-1 pe-1" style="cursor: pointer;">Deactivate</span>
                     </div>
                   </div>
                 </div>

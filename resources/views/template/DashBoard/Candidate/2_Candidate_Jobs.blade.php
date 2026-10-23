@@ -38,7 +38,7 @@
                             {{-- <td>{{ $job->title }}</td> --}}
                             <td>{{ date('d F Y', strtotime(optional($job)->created_at)) }}</td>
                             <td class="text-center">
-                                <span class="rounded"
+                                <span class="rounded-sm"
                                     style="padding: 5px 20px 5px 23px; background: rgb(0, 255, 0); cursor: pointer; margin: 0px 2px 0px 0px;">
                                     <a href="{{ route('JobView', ['jobId' => $job->id]) }}"
                                         style="text-decoration: none;  color:rgb(55, 55, 55);">View</a>
@@ -69,7 +69,7 @@
                             <td>{{ $job->jobs->title }}</td>
                             <td>{{ date('d F Y', strtotime(optional($job)->created_at)) }}</td>
                             <td class="text-center">
-                                <span class="rounded"
+                                <span class="rounded-sm"
                                     style="padding: 5px 20px 5px 23px; background: rgb(0, 255, 0); cursor: pointer; margin: 0px 2px 0px 0px;">
                                     <a href="{{ route('JobView', ['jobId' => $job->id]) }}"
                                         style="text-decoration: none;  color:rgb(55, 55, 55);">View</a>
@@ -100,7 +100,7 @@
                             <td>{{ $job->jobs->title }}</td>
                             <td>{{ date('d F Y', strtotime(optional($job)->created_at)) }}</td>
                             <td class="text-center">
-                                <span class="rounded"
+                                <span class="rounded-sm"
                                     style="padding: 5px 20px 5px 23px; background: rgb(0, 255, 0); cursor: pointer; margin: 0px 2px 0px 0px;">
                                     <a href="{{ route('JobView', ['jobId' => $job->id]) }}"
                                         style="text-decoration: none;  color:rgb(55, 55, 55);">View</a>

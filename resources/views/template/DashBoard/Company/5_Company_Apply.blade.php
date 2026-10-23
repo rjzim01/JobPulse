@@ -39,10 +39,10 @@
                   <td>{{ $user->user->name }}</td>
                   <td>{{ date('d F Y', strtotime(optional($user)->created_at)) }}</td>
                   <td class="text-center">
-                    <span class="rounded" style="padding: 5px 20px 5px 23px; background: rgb(0, 255, 0); cursor: pointer; margin: 0px 2px 0px 0px;">
+                    <span class="rounded-sm" style="padding: 5px 20px 5px 23px; background: rgb(0, 255, 0); cursor: pointer; margin: 0px 2px 0px 0px;">
                       <a href="{{ route('CompanyApplyUser', ['jobId'=>$user->job_id, 'userId'=>$user->user->id]) }}" style="text-decoration: none;  color:rgb(55, 55, 55);">View</a>
                     </span>
-                    <span class="rounded" style="padding: 5px 20px 5px 23px; background: rgb(255, 0, 0); cursor: pointer; margin: 0px 2px 0px 0px;">
+                    <span class="rounded-sm" style="padding: 5px 20px 5px 23px; background: rgb(255, 0, 0); cursor: pointer; margin: 0px 2px 0px 0px;">
                       <a href="#" style="text-decoration: none;  color:rgb(55, 55, 55);">Reject</a>
                     </span>
                   </td>
@@ -75,10 +75,10 @@
                   <td>{{ $user->user->name }}</td>
                   <td>{{ date('d F Y', strtotime(optional($user)->created_at)) }}</td>
                   <td class="text-center">
-                    <span class="rounded" style="padding: 5px 20px 5px 23px; background: rgb(0, 255, 0); cursor: pointer; margin: 0px 2px 0px 0px;">
+                    <span class="rounded-sm" style="padding: 5px 20px 5px 23px; background: rgb(0, 255, 0); cursor: pointer; margin: 0px 2px 0px 0px;">
                       <a href="{{ route('CompanyApplyUser', ['jobId'=>$user->job_id, 'userId'=>$user->user->id]) }}" style="text-decoration: none;  color:rgb(55, 55, 55);">View</a>
                     </span>
-                    <span class="rounded" style="padding: 5px 20px 5px 23px; background: rgb(255, 0, 0); cursor: pointer; margin: 0px 2px 0px 0px;">
+                    <span class="rounded-sm" style="padding: 5px 20px 5px 23px; background: rgb(255, 0, 0); cursor: pointer; margin: 0px 2px 0px 0px;">
                       <a href="#" style="text-decoration: none;  color:rgb(55, 55, 55);">Reject</a>
                     </span>
                   </td>
@@ -111,10 +111,10 @@
                   <td>{{ $user->user->name }}</td>
                   <td>{{ date('d F Y', strtotime(optional($user)->created_at)) }}</td>
                   <td class="text-center">
-                    <span class="rounded" style="padding: 5px 20px 5px 23px; background: rgb(0, 255, 0); cursor: pointer; margin: 0px 2px 0px 0px;">
+                    <span class="rounded-sm" style="padding: 5px 20px 5px 23px; background: rgb(0, 255, 0); cursor: pointer; margin: 0px 2px 0px 0px;">
                       <a href="{{ route('CompanyApplyUser', ['jobId'=>$user->job_id, 'userId'=>$user->user->id]) }}" style="text-decoration: none;  color:rgb(55, 55, 55);">View</a>
                     </span>
-                    <span class="rounded" style="padding: 5px 20px 5px 23px; background: rgb(255, 0, 0); cursor: pointer; margin: 0px 2px 0px 0px;">
+                    <span class="rounded-sm" style="padding: 5px 20px 5px 23px; background: rgb(255, 0, 0); cursor: pointer; margin: 0px 2px 0px 0px;">
                       <a href="#" style="text-decoration: none;  color:rgb(55, 55, 55);">Reject</a>
                     </span>
                   </td>

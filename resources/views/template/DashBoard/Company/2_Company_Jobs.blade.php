@@ -43,10 +43,10 @@
                 <td>{{ $job->title }}</td>
                 <td>{{ date('d F Y', strtotime(optional($job)->created_at)) }}</td>
                 <td class="text-center">
-                  <span class="rounded" style="padding: 5px 20px 5px 23px; background: rgb(0, 255, 0); cursor: pointer; margin: 0px 2px 0px 0px;">
+                  <span class="rounded-sm" style="padding: 5px 20px 5px 23px; background: rgb(0, 255, 0); cursor: pointer; margin: 0px 2px 0px 0px;">
                     <a href="{{ route('CompanyJobView', ['jobId'=>$job->id]) }}" style="text-decoration: none;  color:rgb(55, 55, 55);">View</a>
                   </span>
-                  <span class="rounded" style="padding: 5px 10px 5px 10px; background: rgb(255, 0, 0); cursor: pointer; margin: 0px 0px 0px 2px;">
+                  <span class="rounded-sm" style="padding: 5px 10px 5px 10px; background: rgb(255, 0, 0); cursor: pointer; margin: 0px 0px 0px 2px;">
                     <a href="{{ route('CompanyJobDelete', ['jobId'=>$job->id]) }}" style="text-decoration: none; color:rgb(0, 0, 0);">Delete</a>
                   </span>
                 </td>
@@ -76,10 +76,10 @@
                 <td>{{ $job->title }}</td>
                 <td>{{ date('d F Y', strtotime(optional($job)->created_at)) }}</td>
                 <td class="text-center">
-                  <span class="rounded" style="padding: 5px 20px 5px 23px; background: rgb(0, 255, 0); cursor: pointer; margin: 0px 2px 0px 0px;">
+                  <span class="rounded-sm" style="padding: 5px 20px 5px 23px; background: rgb(0, 255, 0); cursor: pointer; margin: 0px 2px 0px 0px;">
                     <a href="{{ route('CompanyJobView', ['jobId'=>$job->id]) }}" style="text-decoration: none;  color:rgb(55, 55, 55);">View</a>
                   </span>
-                  <span class="rounded" style="padding: 5px 10px 5px 10px; background: rgb(255, 0, 0); cursor: pointer; margin: 0px 0px 0px 2px;">
+                  <span class="rounded-sm" style="padding: 5px 10px 5px 10px; background: rgb(255, 0, 0); cursor: pointer; margin: 0px 0px 0px 2px;">
                     <a href="{{ route('CompanyJobDelete', ['jobId'=>$job->id]) }}" style="text-decoration: none; color:rgb(0, 0, 0);">Delete</a>
                   </span>
                 </td>
@@ -110,10 +110,10 @@
                 <td>{{ $job->title }}</td>
                 <td>{{ date('d F Y', strtotime(optional($job)->created_at)) }}</td>
                 <td class="text-center">
-                  <span class="rounded" style="padding: 5px 20px 5px 23px; background: rgb(0, 255, 0); cursor: pointer; margin: 0px 2px 0px 0px;">
+                  <span class="rounded-sm" style="padding: 5px 20px 5px 23px; background: rgb(0, 255, 0); cursor: pointer; margin: 0px 2px 0px 0px;">
                     <a href="{{ route('CompanyJobView', ['jobId'=>$job->id]) }}" style="text-decoration: none;  color:rgb(55, 55, 55);">View</a>
                   </span>
-                  <span class="rounded" style="padding: 5px 10px 5px 10px; background: rgb(255, 0, 0); cursor: pointer; margin: 0px 0px 0px 2px;">
+                  <span class="rounded-sm" style="padding: 5px 10px 5px 10px; background: rgb(255, 0, 0); cursor: pointer; margin: 0px 0px 0px 2px;">
                     <a href="{{ route('CompanyJobDelete', ['jobId'=>$job->id]) }}" style="text-decoration: none; color:rgb(0, 0, 0);">Delete</a>
                   </span>
                 </td>

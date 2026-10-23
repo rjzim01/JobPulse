@@ -21,7 +21,7 @@
             <label for="photo" class="block text-sm font-medium text-gray-700">Choose Photo:</label>
             <div class="mt-1 flex items-center">
                 <input type="file" id="photo" name="photo" class="hidden" onchange="previewPhoto(event)">
-                <label for="photo" class="px-3 py-2 bg-white border border-gray-300 rounded-md cursor-pointer text-sm leading-4 font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:border-blue-700 focus:ring-blue active:bg-gray-50 active:text-blue-700">Select a file</label>
+                <label for="photo" class="px-3 py-2 bg-white border border-gray-300 rounded-md cursor-pointer text-sm leading-4 font-medium text-blue-600 hover:text-blue-500 focus:outline-hidden focus:border-blue-700 focus:ring-blue active:bg-gray-50 active:text-blue-700">Select a file</label>
                 <span id="photoFileName" class="ml-2 text-sm text-gray-500"></span>
             </div>
         </div>
